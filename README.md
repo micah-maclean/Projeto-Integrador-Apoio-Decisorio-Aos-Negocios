@@ -15,6 +15,7 @@ Para a implementação desta segunda etapa do projeto, foram utilizadas as segui
 •	Controle de Versão: GitHub, utilizado para a colaboração entre os membros do grupo e para a publicação e gestão dos códigos-fonte do projeto.
 
 3. Detalhamento Técnico
+
 3.1 Modelo Dimensional (Star Schema)
 A estrutura do Data Warehouse foi concebida com base no Esquema Estrela, que é otimizado para consultas analíticas. As tabelas que compõem este modelo são:
 
@@ -24,6 +25,7 @@ DimDate	Dimensão	Dimensão de tempo para análises de sazonalidade e tendência
 DimProduct	Dimensão	Atributos detalhados dos produtos, incluindo categorias e subcategorias.
 DimCustomer	Dimensão	Dados demográficos e geográficos dos clientes.
 DimSalesTerritory	Dimensão	Organização regional e grupos de vendas.
+
 3.2 Processo de ETL (Extração, Transformação e Carga)
 O fluxo de dados para o Data Warehouse seguiu uma lógica de extração incremental e limpeza em uma camada de staging, conforme detalhado abaixo:
 
