@@ -3,10 +3,21 @@ Curso: Tecnologia em Banco de Dados (5º Semestre) – SENAC
 
 Grupo 01: Antonio Carlos Lemos, Carlos Eduardo Matos dos Santos, Elton Tonello Albuquerque, Felipe Sasse Ulloa, Leno Guedes Goulart, Rodolpho Diego Silva Pereira e Micah Rodrigues Maclean.
 
-1. Visão Geral da Solução
+1. Objetivo Geral do Projeto
+
 Dando continuidade à primeira etapa, este projeto implementa uma solução de apoio decisório (Business Intelligence - BI) para a empresa AdventureWorks. O objetivo principal é transformar dados transacionais (Online Transaction Processing - OLTP) em uma estrutura analítica (Online Analytical Processing - OLAP) utilizando um Modelo Dimensional em Esquema Estrela (Star Schema). Esta abordagem permite análises mais eficientes e a geração de insights estratégicos para a tomada de decisões.
 
-2. Definição das Tecnologias
+1.1 Objetivos Específicos
+
+Para alcançar o objetivo geral, o projeto contempla os seguintes objetivos específicos:
+
+•	Definir e documentar os principais elementos do Modelo Dimensional, incluindo tabela fato, dimensões, granularidade e métricas de negócio.
+•	Implementar um processo de ETL composto pelas etapas de extração, transformação e carga, garantindo a qualidade, consistência e integridade dos dados.
+•	Desenvolver consultas OLAP que permitam análises como faturamento por período, margem de contribuição por região e ticket médio por perfil de cliente.
+•	Publicar a solução em ambiente de nuvem e disponibilizar todos os códigos em repositório versionado, assegurando transparência, organização e acessibilidade.
+•	Produzir um vídeo de demonstração apresentando o funcionamento da solução, suas etapas e seus resultados.
+
+3. Definição das Tecnologias
 Para a implementação desta segunda etapa do projeto, foram utilizadas as seguintes tecnologias e ferramentas:
 
 •	SGBD: SQL Server (utilizado para a criação do Data Warehouse e a execução dos scripts de ETL e OLAP).
