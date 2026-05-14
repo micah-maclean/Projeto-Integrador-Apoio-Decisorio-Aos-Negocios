@@ -1,60 +1,195 @@
-# Projeto-Integrador-Apoio-Decisorio-Aos-Negocios
-Curso: Tecnologia em Banco de Dados (5º Semestre) – SENAC
+# 🚲 Projeto Integrador — Gestão de Bases de Dados Empresariais
+**Apoio Decisório aos Negócios | AdventureWorks**
 
-Grupo 01: Antonio Carlos Lemos, Carlos Eduardo Matos dos Santos, Elton Tonello Albuquerque, Felipe Sasse Ulloa, Leno Guedes Goulart, Rodolpho Diego Silva Pereira e Micah Rodrigues Maclean.
+> Curso de Tecnologia em Banco de Dados — SENAC EAD 2026  
+> Professor: Gustavo Calixto
 
-1. Objetivo Geral do Projeto
+---
 
-Dando continuidade à primeira etapa, este projeto implementa uma solução de apoio decisório (Business Intelligence - BI) para a empresa AdventureWorks. O objetivo principal é transformar dados transacionais (Online Transaction Processing - OLTP) em uma estrutura analítica (Online Analytical Processing - OLAP) utilizando um Modelo Dimensional em Esquema Estrela (Star Schema). Esta abordagem permite análises mais eficientes e a geração de insights estratégicos para a tomada de decisões.
+## 👥 Integrantes do Grupo 01
 
-1.1 Objetivos Específicos
+| Nome |
+|------|
+| Antonio Carlos Lemos |
+| Carlos Eduardo Matos dos Santos |
+| Elton Tonello Albuquerque |
+| Felipe Sasse Ulloa |
+| Leno Guedes Goulart |
+| Rodolpho Diego Silva Pereira |
+| Micah Rodrigues Maclean |
 
-Para alcançar o objetivo geral, o projeto contempla os seguintes objetivos específicos:
+---
 
-•	Definir e documentar os principais elementos do Modelo Dimensional, incluindo tabela fato, dimensões, granularidade e métricas de negócio.
-•	Implementar um processo de ETL composto pelas etapas de extração, transformação e carga, garantindo a qualidade, consistência e integridade dos dados.
-•	Desenvolver consultas OLAP que permitam análises como faturamento por período, margem de contribuição por região e ticket médio por perfil de cliente.
-•	Publicar a solução em ambiente de nuvem e disponibilizar todos os códigos em repositório versionado, assegurando transparência, organização e acessibilidade.
-•	Produzir um vídeo de demonstração apresentando o funcionamento da solução, suas etapas e seus resultados.
+## 📋 Resumo
 
-3. Definição das Tecnologias
-Para a implementação desta segunda etapa do projeto, foram utilizadas as seguintes tecnologias e ferramentas:
+Este projeto descreve o desenvolvimento de uma solução completa de apoio decisório para a **AdventureWorks** (indústria de bicicletas), com implementação de um **Modelo Dimensional (MD)** e processos de **ETL (Extract, Transform and Load)**.
 
-•	SGBD: SQL Server (utilizado para a criação do Data Warehouse e a execução dos scripts de ETL e OLAP).
-•	Linguagem: SQL (empregada para a definição da estrutura do banco de dados - DDL, para a carga e manipulação de dados - DML, e para a elaboração de consultas analíticas OLAP).
-•	Integração de Dados: O processo de ETL (Extract, Transform, Load) foi simulado através de scripts SQL e a utilização de uma View de Staging, garantindo a extração, transformação e carga dos dados de forma controlada.
-•	Controle de Versão: GitHub, utilizado para a colaboração entre os membros do grupo e para a publicação e gestão dos códigos-fonte do projeto.
+O objetivo é converter dados transacionais (OLTP) em uma estrutura analítica **OLAP**, viabilizando a análise de KPIs relacionados a vendas por período, região e produto, por meio de um esquema estrela (*star schema*).
 
-3. Detalhamento Técnico
+---
 
-3.1 Modelo Dimensional (Star Schema)
-A estrutura do Data Warehouse foi concebida com base no Esquema Estrela, que é otimizado para consultas analíticas. As tabelas que compõem este modelo são:
+## 🎯 Objetivos
 
-Tabela	Tipo	Descrição
-FactInternetSales	Fato	Centraliza as métricas de vendas, com granularidade no item de linha do pedido.
-DimDate	Dimensão	Dimensão de tempo para análises de sazonalidade e tendências.
-DimProduct	Dimensão	Atributos detalhados dos produtos, incluindo categorias e subcategorias.
-DimCustomer	Dimensão	Dados demográficos e geográficos dos clientes.
-DimSalesTerritory	Dimensão	Organização regional e grupos de vendas.
+- Desenvolver um **Data Warehouse** estruturado em *star schema* com base no dataset AdventureWorksDW2022
+- Implementar um pipeline de **ETL** com extração incremental, transformação e carga dos dados
+- Disponibilizar **KPIs estratégicos** para suporte à tomada de decisão gerencial
+- Entregar documentação técnica e scripts de banco de dados testados e validados
 
-3.2 Processo de ETL (Extração, Transformação e Carga)
-O fluxo de dados para o Data Warehouse seguiu uma lógica de extração incremental e limpeza em uma camada de staging, conforme detalhado abaixo:
+---
 
-•	Extração: Realizada através da coleta simulada de dados de pedidos de venda da base transacional.
-•	Transformação: Implementada por meio da VIEW stg_vendas_limpas, responsável por tratar valores nulos, padronizar formatos de datas e calcular o faturamento líquido, preparando os dados para a carga.
-•	Carga: Inserção final dos dados transformados na tabela de fatos (FactInternetSales), estabelecendo o vínculo das chaves substitutas (Surrogate Keys) com as respectivas tabelas de dimensão.
+## 🏗️ Arquitetura da Solução
 
-4. Operações OLAP (Análises Estratégicas)
-Para validar o modelo dimensional e fornecer suporte à decisão, foram implementadas as seguintes consultas analíticas, que permitem extrair insights estratégicos:
+```
+[Fontes OLTP]
+     │
+     ▼
+  Extração (SQL incremental)
+     │
+     ▼
+  Staging Area (stg_vendas_limpas)
+     │
+     ▼
+  Transformação (SQL + Python/Pandas)
+     │
+     ▼
+  Data Warehouse ─── FactInternetSales
+                 └── DimDate
+                 └── DimProduct
+                 └── DimCustomer
+                 └── DimSalesTerritory
+```
 
-•	Faturamento Mensal por Categoria: Permite identificar tendências temporais de vendas e sazonalidade por categoria de produto, auxiliando no planejamento de estoque e campanhas de marketing.
-•	Margem de Contribuição por Região: Analisa a rentabilidade real dos produtos ou serviços por território de vendas, fornecendo informações cruciais para a otimização de estratégias comerciais regionais.
-•	Ticket Médio por Perfil de Cliente: Segmenta o valor médio gasto pelos clientes com base em seu nível de escolaridade e ocupação, possibilitando a criação de campanhas de marketing direcionadas e a personalização de ofertas.
+**Fonte de dados:** [AdventureWorksDW2022](https://github.com/microsoft/sql-server-samples)  
+**Tecnologias:** SQL Server · Python (Pandas) · SQL (DDL/DML)
 
-5. Estrutura do Repositório
-Para facilitar a navegação e o entendimento do projeto, os arquivos estão organizados da seguinte forma no repositório:
+---
 
-•	ddl_scripts.sql: Contém os scripts SQL para a criação das tabelas do Data Warehouse (Data Definition Language - DDL).
-•	etl_scripts.sql: Inclui os scripts SQL responsáveis pela carga e transformação dos dados (Data Manipulation Language - DML), que compõem o processo de ETL.
-•	olap_queries.sql: Apresenta as consultas analíticas SQL desenvolvidas para a validação do modelo e para as operações OLAP.
-•	/evidencias: Pasta dedicada a armazenar os prints dos resultados das consultas OLAP, servindo como comprovação das análises realizadas.
+## 🗂️ Modelo Dimensional
+
+### Tabela de Fatos
+| Tabela | Granularidade |
+|--------|---------------|
+| `FactInternetSales` | Item de linha por pedido de venda (produto × transação) |
+
+### Dimensões
+
+| Dimensão | Atributos-Chave | Hierarquia | Objetivo Decisório |
+|----------|----------------|------------|-------------------|
+| `DimDate` | DateKey, Year, Month, Day | Ano > Mês > Dia | Tendências temporais e sazonalidade |
+| `DimProduct` | ProductKey, Category, Subcategory | Categoria > Subcategoria > Produto | Mix de produtos e retorno por item |
+| `DimCustomer` | CustomerKey, City, StateProvince | País > Estado > Cidade | Perfil geográfico do consumidor |
+| `DimSalesTerritory` | TerritoryKey, Region, Country | Grupo > País > Região | Performance por território |
+
+---
+
+## 📊 KPIs Implementados
+
+| KPI | Cálculo | Finalidade |
+|-----|---------|------------|
+| **Faturamento Bruto** | `SUM(SalesAmount)` | Saúde financeira e volume de vendas |
+| **Margem de Contribuição** | `SUM(SalesAmount - TotalProductCost)` | Rentabilidade por produto/região |
+| **Ticket Médio** | `SUM(SalesAmount) / COUNT(DISTINCT CustomerKey)` | Potencial de consumo da base de clientes |
+| **Crescimento YoY** | Comparação anual via `DimDate` | Análise de crescimento ano a ano |
+
+---
+
+## 🔍 Consultas Analíticas
+
+### A. Faturamento Mensal por Categoria
+
+```sql
+SELECT
+    d.CalendarYear      AS Ano,
+    d.MonthNumberOfYear AS Mes,
+    p.EnglishProductCategoryName AS Categoria,
+    SUM(f.SalesAmount)  AS FaturamentoTotal
+FROM FactInternetSales f
+JOIN DimDate    d ON f.OrderDateKey = d.DateKey
+JOIN DimProduct p ON f.ProductKey   = p.ProductKey
+GROUP BY d.CalendarYear, d.MonthNumberOfYear, p.EnglishProductCategoryName
+ORDER BY Ano DESC, Mes ASC;
+```
+
+### B. Margem de Contribuição por Região
+
+```sql
+SELECT
+    t.SalesTerritoryCountry AS Pais,
+    t.SalesTerritoryRegion  AS Regiao,
+    SUM(f.SalesAmount)                        AS Receita,
+    SUM(f.SalesAmount - f.TotalProductCost)   AS MargemContribuicao
+FROM FactInternetSales f
+JOIN DimSalesTerritory t ON f.SalesTerritoryKey = t.SalesTerritoryKey
+GROUP BY t.SalesTerritoryCountry, t.SalesTerritoryRegion
+ORDER BY MargemContribuicao DESC;
+```
+
+### C. Ticket Médio por Cliente
+
+```sql
+SELECT
+    COUNT(DISTINCT f.CustomerKey)                            AS TotalClientes,
+    SUM(f.SalesAmount) / COUNT(DISTINCT f.CustomerKey)      AS TicketMedio
+FROM FactInternetSales f;
+```
+
+---
+
+## ⚙️ Processo de ETL
+
+### 1. Extração (E)
+Coleta incremental a partir das tabelas `SalesOrderHeader` e `SalesOrderDetail`, selecionando apenas registros novos ou alterados desde a última carga por meio de campos de data de modificação.
+
+### 2. Transformação (T)
+
+```sql
+-- Staging: limpeza e padronização dos dados brutos
+CREATE VIEW stg_vendas_limpas AS
+SELECT
+    SalesOrderID,
+    COALESCE(UnitPrice, 0)                                              AS UnitPrice,
+    OrderQty,
+    (UnitPrice * OrderQty) - COALESCE(UnitPriceDiscount, 0)            AS LineTotal,
+    CAST(OrderDate AS DATE)                                             AS OrderDate,
+    ProductID,
+    CustomerID
+FROM Sales.SalesOrderDetail
+WHERE UnitPrice > 0;
+```
+
+Operações realizadas: limpeza de nulos · padronização de datas e moedas · cálculo de colunas derivadas · mapeamento de *Surrogate Keys* (SCD)
+
+### 3. Carga (L)
+
+```sql
+INSERT INTO FactInternetSales (ProductKey, CustomerKey, OrderDateKey, SalesTerritoryKey, SalesAmount)
+SELECT
+    p.ProductKey,
+    c.CustomerKey,
+    d.DateKey,
+    t.SalesTerritoryKey,
+    s.LineTotal
+FROM stg_vendas_limpas s
+JOIN DimProduct        p ON s.ProductID  = p.ProductID
+JOIN DimCustomer       c ON s.CustomerID = c.CustomerID
+JOIN DimDate           d ON s.OrderDate  = d.FullDateAlternateKey
+JOIN DimSalesTerritory t ON s.TerritoryID = t.SalesTerritoryKey;
+```
+
+### 4. Validação e Monitoramento
+
+```sql
+SELECT
+    (SELECT COUNT(*) FROM stg_vendas_limpas)                                        AS Registros_Staging,
+    (SELECT COUNT(*) FROM FactInternetSales WHERE OrderDateKey = 20260322)          AS Registros_DW_Hoje;
+```
+
+---
+
+## 📚 Referências
+
+- KIMBALL, R.; ROSS, M. *The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling*. 3. ed. Wiley, 2013.
+- FREITAS, M. B. *Modelagem dimensional de um data warehouse para análise de dados acadêmicos*. Monografia — CEFET-MG, 2023.
+- BRUZAROSCO, D. C.; CASTOLDI, A. V.; PACHECO, R. C. S. Criando data warehouse com o modelo dimensional. *Acta Scientiarum. Technology*, v. 26, n. 1, p. 71–80, 2004.
+- MACHADO, V. H. Data warehouse e usabilidade do modelo dimensional estrela. *Prospectus*, v. 2, n. 1, 2024.
+- Microsoft. *AdventureWorksDW2022 Database*. Disponível em: https://github.com/microsoft/sql-server-samples
