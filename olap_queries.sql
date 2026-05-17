@@ -1,5 +1,5 @@
 -- Consultas OLAP para análise de dados no Data Warehouse AdventureWorksDW
-
+USE adventureWorksDW;
 -- 1. Análise de Faturamento Mensal por Categoria (Tendência Temporal)
 -- Esta consulta permite identificar quais categorias de produtos estão impulsionando o faturamento em cada mês.
 SELECT
@@ -50,5 +50,6 @@ GROUP BY dd.CalendarYear
 ORDER BY Ano DESC;
 
 -- Exemplo de consulta para verificar os dados carregados na FactInternetSales
-SELECT TOP 100 *
-FROM FactInternetSales;
+SELECT *
+FROM FactInternetSales
+LIMIT 100;

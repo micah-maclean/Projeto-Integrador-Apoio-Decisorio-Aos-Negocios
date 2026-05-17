@@ -1,5 +1,5 @@
 -- Script ETL (Extract, Transform, Load) para popular o Data Warehouse AdventureWorksDW
-
+USE adventureWorksDW;
 -- Simulação de dados de origem (OLTP) para as tabelas de dimensão e fato
 -- Em um cenário real, estes dados seriam extraídos de um banco de dados transacional
 
@@ -128,7 +128,7 @@ SELECT
     dd.DateKey,
     dc.CustomerKey,
     dst.SalesTerritoryKey, -- Usando um SalesTerritoryKey fixo para simplificação
-    CAST(svl.SalesOrderID AS VARCHAR(20)),
+    CAST(svl.SalesOrderID AS CHAR(20)),
     svl.SalesOrderDetailID,
     svl.OrderQty,
     svl.UnitPrice,
@@ -140,8 +140,8 @@ SELECT
     svl.LineTotal * 0.05 AS TaxAmt, -- Exemplo de cálculo de imposto (5%)
     svl.LineTotal * 0.02 AS Freight, -- Exemplo de cálculo de frete (2%)
     CAST(svl.OrderDate_Source AS DATE),
-    DATEADD(day, 7, CAST(svl.OrderDate_Source AS DATE)) AS DueDate, -- Exemplo: 7 dias após o pedido
-    DATEADD(day, 3, CAST(svl.OrderDate_Source AS DATE)) AS ShipDate -- Exemplo: 3 dias após o pedido
+    DATE_ADD(CAST(svl.OrderDate_Source AS DATE), INTERVAL 7 DAY) AS DueDate, -- Exemplo: 7 dias após o pedido
+    DATE_ADD(CAST(svl.OrderDate_Source AS DATE), INTERVAL 3 DAY) AS ShipDate -- Exemplo: 3 dias após o pedido 
 FROM stg_vendas_limpas svl
 JOIN DimProduct dp ON svl.ProductID = dp.ProductKey
 JOIN DimDate dd ON svl.OrderDateKey_Source = dd.DateKey

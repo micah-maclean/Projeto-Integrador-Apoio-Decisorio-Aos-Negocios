@@ -1,4 +1,6 @@
 -- Script DDL para criação das tabelas do Data Warehouse AdventureWorksDW
+CREATE DATABASE adventureWorksDW;
+USE adventureWorksDW;
 
 -- Tabela de Dimensão: DimDate
 CREATE TABLE DimDate (
