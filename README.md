@@ -60,7 +60,7 @@ O objetivo é converter dados transacionais (OLTP) em uma estrutura analítica *
 ```
 
 **Fonte de dados:** [AdventureWorksDW2022](https://github.com/microsoft/sql-server-samples)  
-**Tecnologias:** SQL Server · Python (Pandas) · SQL (DDL/DML)
+**Tecnologias:** MySQL Server · SQL (DDL/DML)
 
 ---
 
